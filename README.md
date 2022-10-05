@@ -3,16 +3,18 @@
 
 Information security's primary focus is the balanced protection of the confidentiality, integrity, and availability (CIA) of data while maintaining a focus on efficient policy implementation, all without hampering organization productivity.[^wiki]
 
-Goals:
-- Confidentiality (保密性)  
-  Confidentiality is the property, that information is not made available or disclosed to unauthorized individuals, entities, or processes.[^wiki]
-- Integrity (完整性)  
-  Integrity means maintaining and assuring the accuracy and completeness of data over its entire lifecycle.[^wiki]
-- Availability (可用性)  
-  For any information system to serve its purpose, the information must be available when it is needed.[^wiki]
+Objects:
+- CIA
+  - Confidentiality (保密性)  
+    Confidentiality is the property, that information is not made available or disclosed to unauthorized individuals, entities, or processes.[^wiki]
+  - Integrity (完整性)  
+    Integrity means maintaining and assuring the accuracy and completeness of data over its entire lifecycle.[^wiki] The information cannot be modified in an unauthorized or undetected manner.
+  - Availability (可用性)  
+    For any information system to serve its purpose, the information must be available when it is needed.[^wiki]
 - Non-repudiation (不可否认性)  
-  Non-repudiation implies one's intention to fulfill their obligations to a contract. It also implies that one party of a transaction cannot deny having received a transaction, nor can the other party deny having sent a transaction.[^wiki]
-- Authenticity (真实性)
+  The information's author cannot successfully dispute its authorship or the validity of an associated contract.
+- Authenticity (真实性)  
+  The information's recipient should be able to identify the sender and verify that the purported sender actually sent the message.
 - Privacy (隐私)  
   Confidentiality is a component of privacy that implements to protect our data from unauthorized viewers.[^wiki]
 - Accountability (问责性)
