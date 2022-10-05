@@ -44,10 +44,12 @@ Three steps[^wiki]:
 </details>
 
 Access control models[^access-wiki]:
+- [Multilevel Security](Access%20Control/Multilevel%20Security.md)
+  - [Mandatory Access Control](Access%20Control/Mandatory%20Access%20Control.md)
 - Discretionary/Mandatory
   - Discretionary Access Control (DAC, 自主访问控制)  
     In DAC, the data owner determines who can access specific resources. For example, a system administrator may create a hierarchy of files to be accessed based on certain permissions.
-  - Mandatory Access Control (MAC, 强制访问控制)  
+  - [Mandatory Access Control](Access%20Control/Mandatory%20Access%20Control.md) (MAC, 强制访问控制)  
     In MAC, users do not have much freedom to determine who has access to their files. For example, security clearance of users and classification of data (as confidential, secret or top secret) are used as security labels to define the level of trust.
 - X-Based Access Control (XBAC)  
   - Attribute-based Access Control (ABAC)  
