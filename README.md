@@ -22,6 +22,10 @@ Objects:
   Availability measures the ability of a piece of equipment to be operated if needed, while reliability measures the ability of a piece of equipment to perform its intended function for a specific interval without failure.[^upkeep]
 - Auditability (可审计性)
 
+Standards:
+- [Trusted Computer System Evaluation Criteria (TCSEC)](Standards/TCSEC.md)
+- [Common Criteria (CC)](Standards/Common%20Criteria.md)
+
 ## [Cryptology](https://github.com/Chaoses-Ib/Cryptology)
 
 ## Access control
