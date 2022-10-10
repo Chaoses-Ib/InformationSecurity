@@ -77,6 +77,8 @@ Access control models[^access-wiki]:
   - Rule-Based Access Control (RAC)  
     RAC method, also referred to as Rule-Based Role-Based Access Control (RB-RBAC), is largely context based. Example of this would be allowing students to use labs only during a certain time of day; it is the combination of students' RBAC-based information system access control with the time-based lab access rules.
 
+## [Trusted Computing](Trusted%20Computing/README.md)
+
 [^wiki]: [Information security - Wikipedia](https://en.wikipedia.org/wiki/Information_security)
 [^access-wiki]: [Access control - Wikipedia](https://en.wikipedia.org/wiki/Access_control#Computer_security)
 [^upkeep]: [What is the difference between availability and reliability?](https://www.upkeep.com/learning/availability-vs-reliability)  
