@@ -28,6 +28,9 @@ Standards:
 
 ## [Cryptology](https://github.com/Chaoses-Ib/Cryptology)
 
+## [Steganography](Steganography/README.md)
+- [Least Significant Bit Encoding](Steganography/Least%20Significant%20Bit%20Encoding.md)
+
 ## Access control
 **Access control (AC, 访问控制)** is the selective restriction of access to a place or other resource, while access management describes the process. Permission to access a resource is called **authorization**.[^wiki]
 
