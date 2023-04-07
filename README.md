@@ -16,6 +16,8 @@
 - Discretionary/Mandatory
   - Discretionary Access Control
   - [Mandatory Access Control](Access%20Control/Mandatory%20Access%20Control.md)
+- Authentication
+  - [JSON Web Token](Access%20Control/Authentication/JSON%20Web%20Token.md)
 
 ## [Trusted Computing](Trusted%20Computing/README.md)
 
