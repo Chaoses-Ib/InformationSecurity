@@ -9,6 +9,8 @@
 [No Way, JOSE! Javascript Object Signing and Encryption is a Bad Standard That Everyone Should Avoid - Paragon Initiative Enterprises Blog](https://paragonie.com/blog/2017/03/jwt-json-web-tokens-is-bad-standard-that-everyone-should-avoid)
 - [Stop using JWT for sessions - joepie91's Ramblings](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/)
 
+[jwt-cracker: Simple HS256, HS384 & HS512 JWT token brute force cracker.](https://github.com/lmammino/jwt-cracker)
+
 Discussions:
 - 2021-04 [为什么那么多 web 系统使用 jwt token 来做身份认证 - V2EX](https://fast.v2ex.com/t/774127)
 
@@ -19,6 +21,16 @@ Discussions:
 
 ## Claims
 [JSON Web Token Claims](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims)
+- `iss` (issuer): Issuer of the JWT
+- `sub` (subject): Subject of the JWT (the user)
+- `aud` (audience): Recipient for which the JWT is intended
+- `exp` (expiration time): Time after which the JWT expires
+- `nbf` (not before time): Time before which the JWT must not be accepted for processing
+- `iat` (issued at time): Time at which the JWT was issued; can be used to determine age of the JWT
+- `jti` (JWT ID): Unique identifier; can be used to prevent the JWT from being replayed (allows a token to be used only once)
+
+  [How to use jti claim in a JWT - Stack Overflow](https://stackoverflow.com/questions/28907831/how-to-use-jti-claim-in-a-jwt)
+  > Indeed, storing all issued JWT IDs undermines the stateless nature of using JWTs. However, the purpose of JWT IDs is to be able to revoke previously-issued JWTs. This can most easily be achieved by blacklisting instead of whitelisting. If you've included the "exp" claim (you should), then you can eventually clean up blacklisted JWTs as they expire naturally. Of course you can implement other revocation options alongside (e.g. revoke all tokens of one client based on a combination of "iat" and "aud").
 
 [authentication - What is difference between private and public claims on jwt - Stack Overflow](https://stackoverflow.com/questions/49215866/what-is-difference-between-private-and-public-claims-on-jwt)
 
