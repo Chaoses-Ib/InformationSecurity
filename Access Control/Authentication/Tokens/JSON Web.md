@@ -70,6 +70,8 @@ Discussions:
 [encryption - Should jwt web token be encrypted? - Stack Overflow](https://stackoverflow.com/questions/34235875/should-jwt-web-token-be-encrypted)
 
 ## Implementations
+- Nginx: [Setting up JWT Authentication | NGINX Documentation](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-jwt-authentication/)
+
 ### Rust
 - [jsonwebtoken](https://github.com/Keats/jsonwebtoken)
   - [jwt-authorizer: JWT authorization layer for Axum.](https://github.com/cduvray/jwt-authorizer)
