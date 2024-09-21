@@ -11,4 +11,4 @@
 
 ## Implementations
 Rust:
-- [tower-sessions: 🥠 Sessions as a \`tower\` and \`axum\` middleware.](https://github.com/maxcountryman/tower-sessions)
+- [tower-sessions: 🥠 Sessions as a `tower` and `axum` middleware.](https://github.com/maxcountryman/tower-sessions)
