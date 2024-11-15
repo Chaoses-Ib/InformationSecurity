@@ -22,6 +22,7 @@
     - [JSON Web Token (JWT)](<Access Control/Authentication/Tokens/JSON Web.md>)
     - [PASETO: Platform-Agnostic Security Tokens](Access%20Control/Authentication/Tokens/PASETO.md)
     - [Biscuit](Access%20Control/Authentication/Tokens/Biscuit.md)
+  - [Biometric Authentication](Access%20Control/Authentication/Biometric/README.md)
 - [Authorization](Access%20Control/Authorization/README.md)
 
 ## [Digital Certificates](Certificates/README.md)
