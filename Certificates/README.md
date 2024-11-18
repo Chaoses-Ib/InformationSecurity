@@ -17,7 +17,12 @@
 ## Wildcard certificates
 A public key certificate which uses an asterisk `*` (the wildcard) in its domain name fragment is called a Wildcard certificate. Through the use of `*`, a single certificate may be used for multiple sub-domains. It is commonly used for transport layer security in computer networking.
 
-Only a single level of subdomain matching is supported in accordance with RFC 2818.
+- Only a single level of subdomain matching is supported in accordance with RFC 2818.
+- Cannot be used for the root domain
+
+  Subject Alternative Name: `*.example.com,example.com`
+
+  [Should a wildcard SSL certificate secure both the root domain as well as the sub-domains? - Server Fault](https://serverfault.com/questions/310530/should-a-wildcard-ssl-certificate-secure-both-the-root-domain-as-well-as-the-sub)
 
 Wildcards can be added as domains in multi-domain certificates or [Unified Communications Certificates](https://en.wikipedia.org/wiki/Unified_Communications_Certificate "Unified Communications Certificate") (UCC). In addition, wildcards themselves can have `subjectAltName` extensions, including other wildcards. For example, the wildcard certificate `*.wikipedia.org` has `*.m.wikimedia.org` as a Subject Alternative Name. Thus it secures `www.wikipedia.org` as well as the completely different website name `meta.m.wikimedia.org`.
 
