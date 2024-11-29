@@ -24,6 +24,7 @@
     - [Biscuit](Access%20Control/Authentication/Tokens/Biscuit.md)
   - [Biometric Authentication](Access%20Control/Authentication/Biometric/README.md)
 - [Authorization](Access%20Control/Authorization/README.md)
+- [Secure Shell](Access%20Control/SSH/README.md)
 
 ## [Digital Certificates](Certificates/README.md)
 - [Automatic Certificate Management Environment (ACME)](Certificates/Automatic.md)
