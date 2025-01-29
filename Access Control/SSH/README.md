@@ -177,6 +177,10 @@ Remember the passphrase: [Windows 10 SSH client: password-less access - Super Us
 
   [powershell - Starting a background process on Windows through an SSH connection that doesn't get stopped when SSH disconnects - Stack Overflow](https://stackoverflow.com/questions/75488795/starting-a-background-process-on-windows-through-an-ssh-connection-that-doesnt)
 
-- `Start-Job`, `Start-Process` and `start` don't work.
+- `conhost $targetPath`
+
+- LNK
+
+- `Start-Job`, `Start-Process`, `start` and Windows Terminal don't work.
   
   [How do you run a program over SSH and keep it running when you detach? : r/WindowsHelp](https://www.reddit.com/r/WindowsHelp/comments/pesdkd/how_do_you_run_a_program_over_ssh_and_keep_it/)
