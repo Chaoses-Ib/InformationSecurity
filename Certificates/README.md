@@ -54,6 +54,7 @@ Tools:
 
 ## Services
 - 阿里云
+  - [lyc8503/AliyunCertRenew: 阿里云个人免费证书自动续期, 免去手动申请繁琐流程, 可用 GitHub Actions 快速部署~](https://github.com/lyc8503/AliyunCertRenew)
 - 腾讯云
 - [FreeSSL.cn - 一个提供免费HTTPS证书申请的网站](https://freessl.cn/)
 
