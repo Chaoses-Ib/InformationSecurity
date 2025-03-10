@@ -38,6 +38,11 @@ ssh remote_username@host
 
 - [passh: 𝐬𝐬𝐡𝐩𝐚𝐬𝐬 is 𝒃𝒓𝒐𝒌𝒆𝒏 by design](https://github.com/clarkwang/passh)
 
+VS Code:
+- [Add option to persist/remember SSH password - Issue #7895 - microsoft/vscode-remote-release](https://github.com/microsoft/vscode-remote-release/issues/7895)
+- [hereafter/ssh-vault-vscode](https://github.com/hereafter/ssh-vault-vscode)
+  - Removed from the marketplace?
+
 [ssh-agent - Wikipedia](https://en.wikipedia.org/wiki/Ssh-agent)
 
 ## Host keys
@@ -111,11 +116,16 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
     Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
 }
 ```
+The profile of `OpenSSH-Server-In-TCP` is `Private` only by default.
 
 Client:
 ```
 ssh Administrator@1.2.3.4
 ```
+[Microsoft Accounts](https://github.com/Chaoses-Ib/Windows/blob/main/Kernel/Users/Microsoft.md) are not supported.
+- [ssh login to Microsoft account linked Windows impossible - Microsoft Community](https://answers.microsoft.com/en-us/windows/forum/all/ssh-login-to-microsoft-account-linked-windows/69ea0428-5b06-401c-bb86-e45228709e0b)
+
+[How to SSH into Windows 10 or 11?](https://gist.github.com/teocci/5a96568ab9bf93a592d7a1a237ebb6ea)
 
 ### Key-based authentication
 [Key-based authentication in OpenSSH for Windows | Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement)
@@ -141,17 +151,24 @@ ssh-add $env:USERPROFILE\.ssh\id_ecdsa
 $authorizedKey = Get-Content -Path $env:USERPROFILE\.ssh\id_ecdsa.pub
 
 # Generate the PowerShell to be run remote that will copy the public key file generated previously on your client to the authorized_keys file on your server
+# Standard user:
+# $remotePowershell = "powershell New-Item -Force -ItemType Directory -Path $env:USERPROFILE\.ssh; Add-Content -Force -Path $env:USERPROFILE\.ssh\authorized_keys -Value '$authorizedKey'"
 $remotePowershell = "powershell Add-Content -Force -Path $env:ProgramData\ssh\administrators_authorized_keys -Value '''$authorizedKey''';icacls.exe ""$env:ProgramData\ssh\administrators_authorized_keys"" /inheritance:r /grant ""Administrators:F"" /grant ""SYSTEM:F"""
 
 # Connect to your server and run the PowerShell using the $remotePowerShell variable
 ssh username@domain1@contoso.com $remotePowershell
 ```
+Never worked...
+
 [解决git生成ssh密钥失败问题，本机用户名中文乱码导致密钥生成失败。\_enter file in which to save the key - CSDN博客](https://blog.csdn.net/qq_43689668/article/details/114457483)
 - `-C "Alice"`
 
 Permissions:
 - [Windows SSH server refuses key based authentication from client - Super User](https://superuser.com/questions/1445976/windows-ssh-server-refuses-key-based-authentication-from-client)
 - [windows - Unable to use publickey authentication on Win32 Open SSH server - Super User](https://superuser.com/questions/1538449/unable-to-use-publickey-authentication-on-win32-open-ssh-server)
+- [Win10自带的ssh客户端key权限设置 - 知乎](https://zhuanlan.zhihu.com/p/108445764)
+
+[Windows SSH server refuses key based authentication from client - Super User](https://superuser.com/questions/1445976/windows-ssh-server-refuses-key-based-authentication-from-client)
 
 Remember the passphrase: [Windows 10 SSH client: password-less access - Super User](https://superuser.com/questions/1433917/windows-10-ssh-client-password-less-access)
 
