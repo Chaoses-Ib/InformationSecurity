@@ -35,3 +35,7 @@ Rust:
   - Much less downloads compared to PASETOrs.
   - `.DS_Store`
 - No middleware available
+
+JS:
+- [auth70/paseto-ts: PASETO v4 (encrypt, decrypt, sign & verify) in TypeScript](https://github.com/auth70/paseto-ts)
+- Node.js: [panva/paseto: PASETO (Platform-Agnostic SEcurity TOkens) for Node.js with no dependencies](https://github.com/panva/paseto) (discontinued)
