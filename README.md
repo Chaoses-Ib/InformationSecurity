@@ -19,6 +19,7 @@
 - [Authentication](Access%20Control/Authentication/README.md)
   - [Sessions](Access%20Control/Authentication/Sessions/README.md)
   - [Access Tokens](Access%20Control/Authentication/Tokens/README.md)
+    - [HTTP Basic Authentication](Access%20Control/Authentication/Tokens/Basic.md)
     - [JSON Web Token (JWT)](<Access Control/Authentication/Tokens/JSON Web.md>)
     - [PASETO: Platform-Agnostic Security Tokens](Access%20Control/Authentication/Tokens/PASETO.md)
     - [Biscuit](Access%20Control/Authentication/Tokens/Biscuit.md)

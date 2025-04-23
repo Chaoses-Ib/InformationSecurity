@@ -4,7 +4,7 @@
 [Token Best Practices](https://auth0.com/docs/secure/tokens/token-best-practices)
 
 - [Session tokens](../Sessions/README.md#session-tokens)
-- [HTTP basic authentication](#http-basic-authentication)
+- [HTTP basic authentication](Basic.md)
 - [JSON Web Tokens (JWT)](JSON%20Web.md)
 - [PASETO](PASETO.md)
 - [Biscuit](Biscuit.md)
@@ -15,17 +15,3 @@
 
 ## Session tokens
 [Security Drops - Fundamentals for Developers](https://www.securitydrops.com/session-management/)
-
-## HTTP basic authentication
-[Wikipedia](https://en.wikipedia.org/wiki/Basic_access_authentication), [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
-
-`Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==`
-
-> Basic authentication is typically used in conjunction with HTTPS to provide confidentiality.
-
-JS:
-- [Basic Authentication Using JavaScript - Stack Overflow](https://stackoverflow.com/questions/34860814/basic-authentication-using-javascript)
-- [javascript - Basic authentication with fetch? - Stack Overflow](https://stackoverflow.com/questions/43842793/basic-authentication-with-fetch)
-
-Rust:
-- [axum-auth: High-level http auth extractors for axum](https://github.com/owez/axum-auth)
