@@ -7,9 +7,15 @@
 
 [http - What is the "realm" in basic authentication - Stack Overflow](https://stackoverflow.com/questions/12701085/what-is-the-realm-in-basic-authentication)
 
+## Libraries
 JS:
 - [Basic Authentication Using JavaScript - Stack Overflow](https://stackoverflow.com/questions/34860814/basic-authentication-using-javascript)
 - [javascript - Basic authentication with fetch? - Stack Overflow](https://stackoverflow.com/questions/43842793/basic-authentication-with-fetch)
+- Browsers: [webRequest.onAuthRequired](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onAuthRequired)
+  
+  [Auto Basic Auth](https://gist.github.com/gavinhungry/5373f7de495a820f4a49eea202354840)
+
+  [Is it possible to set browser basic authentication with javascript? - Stack Overflow](https://stackoverflow.com/questions/37481129/is-it-possible-to-set-browser-basic-authentication-with-javascript)
 
 Rust:
 - [axum-auth: High-level http auth extractors for axum](https://github.com/owez/axum-auth)
