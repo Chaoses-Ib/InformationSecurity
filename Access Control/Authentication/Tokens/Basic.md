@@ -7,6 +7,16 @@
 
 [http - What is the "realm" in basic authentication - Stack Overflow](https://stackoverflow.com/questions/12701085/what-is-the-realm-in-basic-authentication)
 
+## URL
+[Wikipedia](https://en.wikipedia.org/wiki/URL)
+
+```antlr
+authority = [userinfo "@"] host [":" port]
+```
+> An optional **userinfo** subcomponent followed by an at symbol (`@`), that may consist of a [user name](https://en.wikipedia.org/wiki/User_(computing) "User (computing)") and an optional [password](https://en.wikipedia.org/wiki/Password "Password") preceded by a colon (`:`). Use of the format `username:password` in the userinfo subcomponent is deprecated for security reasons. Applications should not render as clear text any data after the first colon (`:`) found within a userinfo subcomponent unless the data after the colon is the empty string (indicating no password).
+
+e.g. http://admin:1234@127.0.0.1:5000/
+
 ## Libraries
 JS:
 - [Basic Authentication Using JavaScript - Stack Overflow](https://stackoverflow.com/questions/34860814/basic-authentication-using-javascript)
