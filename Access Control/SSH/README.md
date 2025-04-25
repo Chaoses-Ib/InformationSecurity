@@ -12,19 +12,133 @@ ssh remote_username@host
 
   [Why does sshd requires an absolute path? - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/109380/why-does-sshd-requires-an-absolute-path)
 
-- [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) ([GitHub](https://github.com/github/putty))
+- [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) (~~[GitHub](https://github.com/github/putty)~~)
 
   PuTTY is a free and open-source terminal emulator, serial console and network file transfer application. It supports several network protocols, including SCP, SSH, Telnet, rlogin, and raw socket connection. It can also connect to a serial port. The name "PuTTY" has no official meaning.
 
   - `scoop install putty`
+  - SSH1, SSH2, TELNET, rlogin
+  - `-pw`/`-pwfile`
+  - SCP, SFTP
+  - Port forwarding, SOCKS (no VPN)
+
+- [wolfSSL/wolfssh: wolfSSH is a small, fast, portable SSH implementation, including support for SCP and SFTP.](https://github.com/wolfSSL/wolfssh)
 
 - [Xshell](https://www.netsarang.com/en/xshell/)
+
+Rust:
+- [ssh2-rs: Rust bindings for libssh2](https://github.com/alexcrichton/ssh2-rs)
+- [openssh-rust/openssh: Scriptable SSH through OpenSSH in Rust](https://github.com/openssh-rust/openssh)
+  - > This library supports only password-less authentication schemes.
+- [sshs: Terminal user interface for SSH](https://github.com/quantumsheep/sshs)
+
+Python:
+- [Paramiko: The leading native Python SSHv2 protocol library.](https://github.com/paramiko/paramiko)
+  - [Fabric: Simple, Pythonic remote execution and deployment.](https://github.com/fabric/fabric) ([Homepage](https://www.fabfile.org/))
+    - [Documentation](https://docs.fabfile.org/en/latest/)
+    - [Authentication](https://docs.fabfile.org/en/latest/concepts/authentication.html)
+
+    ```python
+    from fabric import Connection
+    result = Connection('web1.example.com').run('uname -s', hide=True)
+    msg = "Ran {0.command!r} on {0.connection.host}, got stdout:\n{0.stdout}"
+    print(msg.format(result))
+    # Ran 'uname -s' on web1.example.com, got stdout:
+    # Linux
+    ```
 
 [SSH implementation comparison](https://ssh-comparison.quendi.de/)
 
 [Comparison of SSH servers - Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_SSH_servers)
 
 [Comparison of SSH clients - Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_SSH_clients)
+
+[Client-Software for managing multiple SSH-Connections? : r/selfhosted](https://www.reddit.com/r/selfhosted/comments/18zd8pt/clientsoftware_for_managing_multiple/)
+
+### Cluster
+- In-house foreach
+
+  ```bash
+  for host in $(cat hosts.txt); do ssh "$host" "$command" >"output.$host"; done
+  ```
+
+  ```bash
+  tmpdir=${TMPDIR:-/tmp}/pssh.$$
+  mkdir -p $tmpdir
+  count=0
+  while IFS= read -r userhost; do
+      ssh -n -o BatchMode=yes ${userhost} 'uname -a' > ${tmpdir}/${userhost} 2>&1 &
+      count=`expr $count + 1`
+  done < userhost.lst
+  while [ $count -gt 0 ]; do
+      wait $pids
+      count=`expr $count - 1`
+  done
+  echo "Output for hosts are in $tmpdir"
+  ```
+
+  PowerShell:
+  ```pwsh
+  param(
+      [Parameter(Mandatory=$true)]
+      [string]$script
+  )
+
+  $servers = (uv run servers.py).Split(',')
+
+  foreach ($server in $servers) {
+      Write-Host ('-' * 160)
+      Write-Host "Server: $server"
+      if (Test-Path $script) {
+          plink -pw (uv run pw.py $server) -no-antispoof -m $script root@$server
+      } else {
+          plink -pw (uv run pw.py $server) -no-antispoof root@$server $script
+      }
+      if (!$?) {
+          Write-Host "Error executing script on $server" -ForegroundColor Red
+          exit 1
+      }
+  }
+  ```
+
+- tmux
+
+  > I used to use tmux to do this. Split the screen half a dozen times. Connect each pane to a separate instance. Enter `setw synchronize-panes on` and you are now running commands on 6 instances simultaneously. From there you can run `htop` to see resources being used on all instances on one monitor, run `apt-get` commands, etc.
+
+  > It's not quite as feature complete as cluster ssh, however I am also using it and have bound it to "v" with this tmux config:
+  > `bind-key v setw synchronize-panes`
+
+- Perl: [clusterssh: Cluster SSH - Cluster Admin Via SSH](https://github.com/duncs/clusterssh)
+
+  [Cluster SSH - Manage Multiple Linux Servers Simultaneously - Putorius](https://www.putorius.net/cluster-ssh.html) ([Hacker News](https://news.ycombinator.com/item?id=21382998))
+  > I used clusterssh in the past and it is really good at sending commands to multiple machines. However for any real work, I would strongly recommend keeping the typing to a bare minimum and do all your work inside a well tested script. Better yet, use ansible or something like it to manage multiple servers
+
+  > There is plethora of similar tools (cssh, pssh, dsh) but Ansible ad-hoc mode superseeds these ones at any real task involving "simultaneous" management of Linux boxes.
+
+- Ansible
+
+  [Introduction to ad hoc commands --- Ansible Community Documentation](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html)
+
+  > I don't have the hours and days to learn Ansible, and it doesn't make sense for such a small environment. And it's Yet Another Service my successor will have to learn in what is already an incredibly niche position.
+
+- [MultiSSH](https://multissh.dev/)
+  - Panels
+- Rust
+  - [csshw: Cluster SSH tool for Windows inspired by csshX](https://github.com/whme/csshw)
+    - Panels
+- C++
+  - [chaos/pdsh: A high performance, parallel remote shell utility](https://github.com/chaos/pdsh)
+- Python
+  - [pssh: Parallel ssh](https://github.com/robinbowes/pssh) (discontinued)
+- PuTTY
+
+  [ssh - How to run one command to multiple servers with Plink in batch - Stack Overflow](https://stackoverflow.com/questions/68528328/how-to-run-one-command-to-multiple-servers-with-plink-in-batch)
+
+  [Help on running plink for multiple servers. | PowerCLI](https://community.broadcom.com/vmware-cloud-foundation/discussion/help-on-running-plink-for-multiple-servers)
+
+[Client-Software for managing multiple SSH-Connections? : r/selfhosted](https://www.reddit.com/r/selfhosted/comments/18zd8pt/clientsoftware_for_managing_multiple/)
+
+[scripting - Automatically run commands over SSH on many servers - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/19008/automatically-run-commands-over-ssh-on-many-servers)
 
 ## Authentication
 [How to automate SSH login with password? - Server Fault](https://serverfault.com/questions/241588/how-to-automate-ssh-login-with-password)
@@ -33,6 +147,7 @@ ssh remote_username@host
   - `pscp -pw` / `pscp -pwfile`
 
 - `sshpass`
+  - [xhcoding/sshpass-win32: Windows version of http://sourceforge.net/projects/sshpass/](https://github.com/xhcoding/sshpass-win32)
 
   > sshpass is broken by design. When the ssh server is not added already in my `known_hosts`, `sshpass` will not show me the message to add the server to my known hosts, `passh` do not have this problem.
 
@@ -44,6 +159,13 @@ VS Code:
   - Removed from the marketplace?
 
 [ssh-agent - Wikipedia](https://en.wikipedia.org/wiki/Ssh-agent)
+
+### Prompt spoofing
+[PuTTY vulnerability vuln-auth-prompt-spoofing](https://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/vuln-auth-prompt-spoofing.html)
+
+PuTTY:
+- `-batch`
+- [`-no-antispoof`](https://the.earth.li/~sgtatham/putty/0.83/htmldoc/Chapter7.html#plink-option-antispoof)
 
 ## Host keys
 To create SSH protocol version 2 keys, use the ssh-keygen program that comes with OpenSSH:
