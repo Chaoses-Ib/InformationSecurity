@@ -28,7 +28,9 @@
 - [Secure Shell](Access%20Control/SSH/README.md)
 
 ## [Digital Certificates](Certificates/README.md)
+- [Certificate Formats](Certificates/Formats.md)
 - [Automatic Certificate Management Environment (ACME)](Certificates/Automatic.md)
+- [Code Signing](Certificates/Code.md)
 
 ## [Trusted Computing](Trusted%20Computing/README.md)
 

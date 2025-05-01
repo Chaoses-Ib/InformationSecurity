@@ -1,18 +1,7 @@
 # Digital Certificates
 [Wikipedia](https://en.wikipedia.org/wiki/Public_key_certificate)
 
-## Formats
-- `.key` files are generally the private key
-- `.pem` files are generally the public key
-- `.p12`/`.pfx` files have both halves of the key embedded, so that administrators can easily manage halves of keys.
 
-  [security - What is the difference between a cer, pvk, and pfx file? - Stack Overflow](https://stackoverflow.com/questions/2292495/what-is-the-difference-between-a-cer-pvk-and-pfx-file?rq=3)
-
-- `.cert` or `.crt` files are the signed certificates -- basically the "magic" that allows certain sites to be marked as trustworthy by a third party.
-- `.csr` is a certificate signing request, a challenge used by a trusted third party to verify the ownership of a keypair without having direct access to the private key (this is what allows end users, who have no direct knowledge of your website, confident that the certificate is valid). In the self-signed scenario you will use the certificate signing request with your own private key to verify your private key (thus self-signed). Depending on your specific application, this might not be needed. (needed for web servers or RPC servers, but not much else).
-- A JKS keystore is a native file format for Java to store and manage some or all of the components above, and keep a database of related capabilities that are allowed or rejected for each key.
-
-[ssl - Difference between pem, crt, key files - Stack Overflow](https://stackoverflow.com/questions/63195304/difference-between-pem-crt-key-files)
 
 ## Wildcard certificates
 A public key certificate which uses an asterisk `*` (the wildcard) in its domain name fragment is called a Wildcard certificate. Through the use of `*`, a single certificate may be used for multiple sub-domains. It is commonly used for transport layer security in computer networking.
