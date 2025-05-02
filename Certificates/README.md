@@ -1,7 +1,7 @@
 # Digital Certificates
 [Wikipedia](https://en.wikipedia.org/wiki/Public_key_certificate)
 
-
+> 😩数字签名真是天坑，序列化用的是40年前的老格式，从封装格式到扩展名全都不统一，密码学库还都写的难用，PE 签名再叠上微软加的私货就更乱了
 
 ## Wildcard certificates
 A public key certificate which uses an asterisk `*` (the wildcard) in its domain name fragment is called a Wildcard certificate. Through the use of `*`, a single certificate may be used for multiple sub-domains. It is commonly used for transport layer security in computer networking.

@@ -1,13 +1,13 @@
 # Certificate Formats
-- PEM (Base64)
-  - `.cer`
-- DER (binary)
+- [DER](#distinguished-encoding-rules-der) (binary)
   - `.cer`, `.der`
-- PKCS #7
+- [PEM](#privacy-enhanced-mail-pem) (Base64)
+  - `.cer`
+- [PKCS #7](#pkcs-7)
   - Multiple certs
   - Cert only (no private key)
-  - `.p7b`
-- PKCS #12
+  - `.p7b`, `.p7u` (SignTool)
+- [PKCS #12](#pkcs-12)
   - Multiple certs
   - `.pfx`, `.p12`
 - Microsoft Serialized Certificate Store (SST)
@@ -42,15 +42,56 @@ Tools:
 - [SSL Converter - Convert SSL Certificates to different formats](https://www.sslshopper.com/ssl-converter.html)
 - [VSign 远程数字签名解决方案\_代码签名工具](https://www.vsign.com/)
 
+## ASN.1
+[Wikipedia](https://en.wikipedia.org/wiki/ASN.1)
+
+> ASN.1 is a joint standard of the ITU-T in ITU-T Study Group 17 and ISO/IEC, originally defined in 1984 as part of CCITT X.409:1984. In 1988, ASN.1 moved to its own standard, X.208, due to wide applicability. The substantially revised 1995 version is covered by the X.680 series. The latest revision of the X.680 series of recommendations is the 6.0 Edition, published in 2021.
+
+> It is broadly used in telecommunications and computer networking, and especially in cryptography.
+
+Then way is it not widely used as a general serialization format?
+
+[A Warm Welcome to ASN.1 and DER - Let's Encrypt](https://letsencrypt.org/docs/a-warm-welcome-to-asn1-and-der/)
+
+[The specs behind the specs part 1 - Working Group Two](https://web.archive.org/web/20230122104720/https://engineering.wgtwo.com/the-specs-behind-the-specs-part-1) ([Hacker News](https://news.ycombinator.com/item?id=29905090))
+
+Rust:
+- [rasn: A Safe `#[no_std]` ASN.1 Codec Framework](https://github.com/librasn/rasn)
+
+Tools:
+- [ASN.1 JavaScript decoder](https://lapo.it/asn1js/)
+
+### Distinguished Encoding Rules (DER)
+Rust:
+- [RustCrypto/formats/der](https://github.com/RustCrypto/formats/tree/master/der)
+
+### Privacy-Enhanced Mail (PEM)
+Rust:
+- [jcreekmore/pem-rs](https://github.com/jcreekmore/pem-rs)
+- [rustls/pemfile: Basic parser for PEM formatted keys and certificates](https://github.com/rustls/pemfile)
+
+Tools:
+- [Certificate Decoder - Decode certificates to view their contents](https://www.sslshopper.com/certificate-decoder.html)
+
 ## X.509
 [Wikipedia](https://en.wikipedia.org/wiki/X.509)
 
 Rust:
 - [RustCrypto/formats/x509-cert](https://github.com/RustCrypto/formats/tree/master/x509-cert)
   - [formats/x509-cert/tests/certificate.rs](https://github.com/RustCrypto/formats/blob/master/x509-cert/tests/certificate.rs)
-  - [x509-cert: Creating x509 certificates without allocations - Issue #689 - RustCrypto/formats](https://github.com/RustCrypto/formats/issues/689)
+  - [cms: `TagUnexpected` error, but works fine in OpenSSL - Issue #1452](https://github.com/RustCrypto/formats/issues/1452)
+  - `BMPString`
+
+    <details>
+
+    - [x509-cert: support for BMPString? (unknown/unsupported ASN.1 DER tag: 0x1e at DER byte xxx) - Issue #1036](https://github.com/RustCrypto/formats/issues/1036)
+    - [x509-cert: `BMPString` support for `DirectoryString` - Issue #1792](https://github.com/RustCrypto/formats/issues/1792)
+      - [x509-cert: add `DirectoryString::BmpString` by dishmaker - Pull Request #1794](https://github.com/RustCrypto/formats/pull/1794)
+    </details>
+  - [x509-cert: Creating x509 certificates without allocations - Issue #689](https://github.com/RustCrypto/formats/issues/689)
   - [bhesh/x509-verify](https://github.com/bhesh/x509-verify/)
   - [pe-sign: A cross-platform rust no-std library for verifying and extracting signature information from PE files.](https://github.com/0xlane/pe-sign)
+    - [`impl Display for Certificate`](https://github.com/0xlane/pe-sign/blob/b94777828990e21d065ed2482fb31b432a359a2f/src/cert/certificate.rs#L66)
 
   [Update and use more RustCrypto crates by plotnick - Pull Request #58 - oxidecomputer/lpc55\_support](https://github.com/oxidecomputer/lpc55_support/pull/58)
   > The motivation for this change is that Permission Slip uses the latter crate (since it needs full ser/de for certificates), and now that it supports owned types, we can pass around e.g., deserialized objects of type `Certificate` instead of DER serialized `Vec<u8>`.
@@ -97,20 +138,48 @@ Python:
 
   [We build X.509 chains so you don't have to - The Trail of Bits Blog](https://blog.trailofbits.com/2024/01/25/we-build-x-509-chains-so-you-dont-have-to/)
 
-## PEM
+### Subject Public Key Info (SPKI)
 Rust:
-- [jcreekmore/pem-rs](https://github.com/jcreekmore/pem-rs)
-- [rustls/pemfile: Basic parser for PEM formatted keys and certificates](https://github.com/rustls/pemfile)
+- [RustCrypto/formats/spki](https://github.com/RustCrypto/formats/tree/master/spki)
+
+### Cert hash
+Cert hash, fingerprint, thumbprint (Microsoft)
+
+Hash of the whole certificate in DER format.
+
+Used in OCSP, Windows.
+
+Rust:
+- [x509-cert: support for computing certificate fingerprints - Issue #1662 - RustCrypto/formats](https://github.com/RustCrypto/formats/issues/1662)
+  - `>0.3.0-pre.0`
+
+.NET:
+- [X509Certificate2.Thumbprint Property (System.Security.Cryptography.X509Certificates) | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate2.thumbprint?view=net-9.0)
+
+  [c# - How to get the thumbprint of a X509Certificate certificate? - Stack Overflow](https://stackoverflow.com/questions/76157259/how-to-get-the-thumbprint-of-a-x509certificate-certificate)
 
 Tools:
-- [Certificate Decoder - Decode certificates to view their contents](https://www.sslshopper.com/certificate-decoder.html)
+- `openssl x509 -in CERTIFICATE_FILE -fingerprint -noout`
 
-## Distinguished Encoding Rules (DER)
-Rust:
-- [der - Rust](https://docs.rs/der/latest/der/)
+  [Viewing X.509 PEM Certificate Fingerprints with OpenSSL - Jamie Tanna | Software Engineer](https://www.jvt.me/posts/2019/04/03/openssl-fingerprint-x509-pem/)
+- Windows
+
+[security - How to generate X509 certificate thumbprint? - Stack Overflow](https://stackoverflow.com/questions/9296182/how-to-generate-x509-certificate-thumbprint)
 
 ## PKCS #7
 [Wikipedia](https://en.wikipedia.org/wiki/PKCS_7)
+
+PKCS #7, Cryptographic Message Syntax (CMS)
+
+> It’s used in many cryptographic standards, such as S/MIME, PKCS#12 and the RFC 3161 digital timestamping protocol.
+
+Rust:
+- [formats/cms at master - RustCrypto/formats](https://github.com/RustCrypto/formats/tree/master/cms)
+  - [pe-sign: A cross-platform rust no-std library for verifying and extracting signature information from PE files.](https://github.com/0xlane/pe-sign)
+- [rasn\_cms - Rust](https://docs.rs/rasn-cms/latest/rasn_cms/)
+- [picky-rs/picky/src/x509/pkcs7](https://github.com/Devolutions/picky-rs/tree/master/picky/src/x509/pkcs7)
+
+[Why pkcs#7 is so hard to work with in rust ? (and many other languages actualy !) : r/rust](https://www.reddit.com/r/rust/comments/v0jegi/why_pkcs7_is_so_hard_to_work_with_in_rust_and/)
 
 ## PKCS 12
 [Wikipedia](https://en.wikipedia.org/wiki/PKCS_12)
@@ -133,3 +202,9 @@ JS:
 - [digitalbazaar/forge: A native implementation of TLS in Javascript and tools to write crypto-based and network-heavy webapps](https://github.com/digitalbazaar/forge#pkcs12)
 
   [How to load a PKCS#12 Digital Certificate with Javascript WebCrypto API - Stack Overflow](https://stackoverflow.com/questions/36018233/how-to-load-a-pkcs12-digital-certificate-with-javascript-webcrypto-api)
+
+.NET:
+- [Get-PfxCertificate (Microsoft.PowerShell.Security) - PowerShell | Microsoft Learn](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-pfxcertificate?view=powershell-7.5)
+  ```pwsh
+  Get-PfxCertificate -FilePath "c.pfx" -Password (ConvertTo-SecureString pass -AsPlainText -Force)
+  ```
