@@ -88,6 +88,9 @@ Rust:
     - [x509-cert: `BMPString` support for `DirectoryString` - Issue #1792](https://github.com/RustCrypto/formats/issues/1792)
       - [x509-cert: add `DirectoryString::BmpString` by dishmaker - Pull Request #1794](https://github.com/RustCrypto/formats/pull/1794)
     </details>
+  - Dependency hell?
+
+    [der: remove generic `<T>` from `Reader::finish` by dishmaker - Pull Request #1833 - RustCrypto/formats](https://github.com/RustCrypto/formats/pull/1833#issuecomment-2946179404)
   - [x509-cert: Creating x509 certificates without allocations - Issue #689](https://github.com/RustCrypto/formats/issues/689)
   - [bhesh/x509-verify](https://github.com/bhesh/x509-verify/)
   - [pe-sign: A cross-platform rust no-std library for verifying and extracting signature information from PE files.](https://github.com/0xlane/pe-sign)

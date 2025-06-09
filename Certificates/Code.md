@@ -132,6 +132,8 @@ Verifying:
     - `--embed` -> `pesign.signed_data.signer_info.get_nested_signature()` (`unsigned_attrs` where `oid == "1.3.6.1.4.1.311.2.4.1"`)
     - [SignedData::verify](https://github.com/0xlane/pe-sign/blob/b94777828990e21d065ed2482fb31b432a359a2f/src/signed_data.rs#L532)
       - [SignerInfo::verify](https://github.com/0xlane/pe-sign/blob/b94777828990e21d065ed2482fb31b432a359a2f/src/signed_data.rs#L144)
+    - [Make reqwest optional - Issue #4](https://github.com/0xlane/pe-sign/issues/4)
+    - Wasm: ~1 MiB
   - [google/authenticode-rs: Rust tools for working with Authenticode](https://github.com/google/authenticode-rs)
     - Digest only
   - [rustysec/codesigned-rs: Small package to verify code signed binaries on Windows](https://github.com/rustysec/codesigned-rs)
