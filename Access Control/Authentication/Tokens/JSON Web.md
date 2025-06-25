@@ -9,8 +9,6 @@
 [No Way, JOSE! Javascript Object Signing and Encryption is a Bad Standard That Everyone Should Avoid - Paragon Initiative Enterprises Blog](https://paragonie.com/blog/2017/03/jwt-json-web-tokens-is-bad-standard-that-everyone-should-avoid)
 - [Stop using JWT for sessions - joepie91's Ramblings](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/)
 
-[jwt-cracker: Simple HS256, HS384 & HS512 JWT token brute force cracker.](https://github.com/lmammino/jwt-cracker)
-
 Discussions:
 - 2021-04 [为什么那么多 web 系统使用 jwt token 来做身份认证 - V2EX](https://fast.v2ex.com/t/774127)
 
@@ -19,7 +17,27 @@ Discussions:
 - 2021-05 [关于国内腾讯，阿里等等互联网公司的主流业务全都不使用 jwt 做鉴权的一些思考 - V2EX](https://s.v2ex.com/t/776114)
 - 2021-09 [使用 token 不是还是要每次都需要从数据库加载用户信息么和传统 session 有什么区别？ - V2EX](https://www.v2ex.com/t/801448)
 
+## Algorithms
+[RFC 7518 - JSON Web Algorithms (JWA)](https://datatracker.ietf.org/doc/html/rfc7518#section-3)
+
+[JSON Web Token (JWT) Signing Algorithms Overview](https://auth0.com/blog/json-web-token-signing-algorithms-overview/)
+
+> Most JWTs in the wild are just signed. The most common algorithms are:
+- `HS256`: HMAC + SHA256
+- `RS256`: RSASSA-PKCS1-v1_5 + SHA256
+- `ES256`: ECDSA + P-256 + SHA256
+- `PS256`: RSASSA-PSS using SHA-256 MGF1 with SHA-256 (optional)
+- `none` (optional)
+
+[jwt-cracker: Simple HS256, HS384 & HS512 JWT token brute force cracker.](https://github.com/lmammino/jwt-cracker)
+
+[JWT Authentication Bypass leads to Admin Control Panel | by Hohky | InfoSec Write-ups](https://infosecwriteups.com/jwt-authentication-bypass-leads-to-admin-control-panel-dfa6efcdcbf5)
+
+[Another JWT Algorithm Confusion Vulnerability: CVE-2024-54150](https://pentesterlab.com/blog/another-jwt-algorithm-confusion-cve-2024-54150)
+
 ## Claims
+[JSON Web Token (JWT) Claims](https://www.iana.org/assignments/jwt/jwt.xhtml#claims)
+
 [JSON Web Token Claims](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims)
 - `iss` (issuer): Issuer of the JWT
 - `sub` (subject): Subject of the JWT (the user)
@@ -31,6 +49,20 @@ Discussions:
 
   [How to use jti claim in a JWT - Stack Overflow](https://stackoverflow.com/questions/28907831/how-to-use-jti-claim-in-a-jwt)
   > Indeed, storing all issued JWT IDs undermines the stateless nature of using JWTs. However, the purpose of JWT IDs is to be able to revoke previously-issued JWTs. This can most easily be achieved by blacklisting instead of whitelisting. If you've included the "exp" claim (you should), then you can eventually clean up blacklisted JWTs as they expire naturally. Of course you can implement other revocation options alongside (e.g. revoke all tokens of one client based on a combination of "iat" and "aud").
+
+Date time:
+> Implementers MAY provide for some small leeway, usually no more than a few minutes, to account for clock skew.
+> Its value MUST be a number containing a NumericDate value.
+>
+> NumericDate:
+> A JSON numeric value representing the number of seconds from
+> 1970-01-01T00:00:00Z UTC until the specified UTC date/time,
+> ignoring leap seconds.  This is equivalent to the IEEE Std 1003.1,
+> 2013 Edition [POSIX.1] definition "Seconds Since the Epoch", in
+> which each day is accounted for by exactly 86400 seconds, other
+> than that non-integer values can be represented.  See RFC 3339
+> [RFC3339] for details regarding date/times in general and UTC in
+> particular.
 
 [authentication - What is difference between private and public claims on jwt - Stack Overflow](https://stackoverflow.com/questions/49215866/what-is-difference-between-private-and-public-claims-on-jwt)
 
